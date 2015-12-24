@@ -1,0 +1,35 @@
+{% block body %}
+    <div align="right"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal1"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter Question</button></div>
+    <div align="center">
+        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div align="center">
+                            {% render(controller("MCQBackBundle:Question:add")) %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% for question in question %}
+        <div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <tr>
+                    <h4 class="panel-title">Question : {{question.questionname }} ({{ question.type }})</h4>
+                    <div align="right">
+                        <a href="{{ path('mcq_back_update_question', {'id' : question.id }) }}"><button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Modifier"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button></a>
+                        <a href="{{ path('mcq_back_delete_question', {'id' : question.id }) }}"><button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Supprimer"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></a>
+                    </div>
+                </tr>
+            </div>
+            <div class="panel-body">
+                {% render(controller('MCQBackBundle:Choice:list',{'id' : question.id})) %}
+            </div>
+            </div>
+
+        </div>
+    {% endfor %}
+{% endblock %}

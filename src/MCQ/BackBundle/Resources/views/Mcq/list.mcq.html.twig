@@ -1,0 +1,51 @@
+{% extends 'MCQBackBundle:Default:index.html.twig' %}
+{% block body %}
+
+    <div align="right"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter QCM</button></div>
+    <br>
+    <div align="center">
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div align="center">
+                            {% render(controller("MCQBackBundle:Mcq:add")) %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div align="center">
+        <table class="table">
+            <tr>
+                <th width="30%"><span class="label label-default">Nom de QCM  </span></th>
+                <th width="30%"><span class="label label-default">Niveau  </span></th>
+                <th></th>
+                <th></th>
+            </tr>
+            {% for mcq in mcq %}
+                <tr>
+                    <td><a href="{{ path('mcq_back_mcq', {'id' : mcq.id }) }}" >{{ mcq.mcqname }}</a></td>
+                    <td>{{ mcq.level }}</td>
+                    <td align="right"><button type="button" class="btn btn-default" data-toggle="modal" data-placement="top" title="Modifier" data-target="#mcq{{ mcq.id }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button></td>
+                    <td><a href="{{ path('mcq_back_delete_mcq', {'id' : mcq.id }) }}"><button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Supprimer"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></a></td>
+                </tr>
+                <div align="center">
+                    <div class="modal fade" id="mcq{{ mcq.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <div align="center">
+                                        {% render(controller("MCQBackBundle:Mcq:update",{'id' : mcq.id})) %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

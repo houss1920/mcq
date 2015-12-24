@@ -1,0 +1,50 @@
+{% block body %}
+    <div align="right"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter theme</button></div>
+    <div align="center">
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div align="center">
+                            {% render(controller("MCQBackBundle:Topic:add",{'id' : idmcq})) %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% for topic in topic %}
+        <div>
+        <div class="panel panel-default" >
+            <div class="panel-heading">
+
+                <tr>
+                    <h4 class="panel-title">Theme : {{topic.topicname }}</h4>
+                    <div align="right">
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-placement="top" title="Modifier" data-target="#topic{{ topic.id }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                        <a href="{{ path('mcq_back_delete_topic', {'id' : topic.id }) }}"><button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Supprimer"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></a>
+                    </div>
+                </tr>
+            </div>
+            <div class="panel-body">
+                {% render(controller('MCQBackBundle:Question:list',{'id':topic.id})) %}
+            </div>
+            </div>
+
+        </div>
+        <div align="center">
+            <div class="modal fade" id="topic{{ topic.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div align="center">
+                                {% render(controller("MCQBackBundle:Topic:update",{'id': topic.id})) %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

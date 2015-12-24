@@ -1,0 +1,294 @@
+parameters:
+    form.symfony.class:        Symfony\Component\Form\Form
+
+    user.manager.class:        MCQ\BackBundle\Services\UserManager
+    user.type.class:           MCQ\BackBundle\Form\Type\UserType
+    user.add.type.class:       MCQ\BackBundle\Form\Type\UserAddType
+    user.edit.type.class:      MCQ\BackBundle\Form\Type\UserEditType
+    user.handler.class:        MCQ\BackBundle\Form\Handler\UserHandler
+    mcq.manager.class:        MCQ\BackBundle\Services\McqManager
+    mcq.type.class:           MCQ\BackBundle\Form\Type\McqType
+    mcq.edit.type.class:      MCQ\BackBundle\Form\Type\McqEditType
+    mcq.handler.class:        MCQ\BackBundle\Form\Handler\McqHandler
+    topic.manager.class:        MCQ\BackBundle\Services\TopicManager
+    topic.type.class:           MCQ\BackBundle\Form\Type\TopicType
+    topic.edit.type.class:      MCQ\BackBundle\Form\Type\TopicEditType
+    topic.handler.class:        MCQ\BackBundle\Form\Handler\TopicHandler
+    question.manager.class:        MCQ\BackBundle\Services\QuestionManager
+    question.type.class:           MCQ\BackBundle\Form\Type\QuestionType
+    question.edit.type.class:      MCQ\BackBundle\Form\Type\QuestionEditType
+    question.handler.class:        MCQ\BackBundle\Form\Handler\QuestionHandler
+    choice.manager.class:        MCQ\BackBundle\Services\ChoiceManager
+    choice.type.class:           MCQ\BackBundle\Form\Type\ChoiceType
+    choice.edit.type.class:      MCQ\BackBundle\Form\Type\ChoiceEditType
+    choice.handler.class:        MCQ\BackBundle\Form\Handler\ChoiceHandler
+    session.manager.class:        MCQ\BackBundle\Services\SessionManager
+    session.type.class:           MCQ\BackBundle\Form\Type\SessionType
+    session.edit.type.class:      MCQ\BackBundle\Form\Type\SessionEditType
+    session.handler.class:        MCQ\BackBundle\Form\Handler\SessionHandler
+    session.generate.type.class:      MCQ\BackBundle\Form\Type\SessionGenerateType
+
+services:
+
+    mcq_back.user.manager:
+        class: %user.manager.class%
+        arguments: [@doctrine.orm.entity_manager]
+
+    mcq_back.user.type:
+        class: %user.type.class%
+        tags:
+            - {name: form.type, alias: mcq_back_user_type}
+
+    mcq_back.user.add.type:
+            class: %user.add.type.class%
+            tags:
+                - {name: form.type, alias: mcq_back_user_add_type}
+
+    mcq_back.user.add.form:
+            factory_service: form.factory
+            factory_method: createNamed
+            class: %form.symfony.class%
+            arguments:
+                - user
+                - mcq_back_user_add_type
+
+    mcq_back.user.add.handler:
+            class: %user.handler.class%
+            arguments: [@mcq_back.user.add.form, @request, @mcq_back.user.manager]
+            scope: request
+
+    mcq_back.user.form:
+        factory_service: form.factory
+        factory_method: createNamed
+        class: %form.symfony.class%
+        arguments:
+            - user
+            - mcq_back_user_type
+
+    mcq_back.user.handler:
+        class: %user.handler.class%
+        arguments: [@mcq_back.user.form, @request, @mcq_back.user.manager]
+        scope: request
+
+    mcq_back.user.edit.type:
+        class: %user.edit.type.class%
+        tags:
+            - {name: form.type, alias: mcq_back_user_edit_type}
+
+    mcq_back.mcq.manager:
+        class: %mcq.manager.class%
+        arguments: [@doctrine.orm.entity_manager]
+
+    mcq_back.mcq.type:
+        class: %mcq.type.class%
+        tags:
+            - {name: form.type, alias: mcq_back_mcq_type}
+
+    mcq_back.mcq.form:
+        factory_service: form.factory
+        factory_method: createNamed
+        class: %form.symfony.class%
+        arguments:
+            - mcq
+            - mcq_back_mcq_type
+
+    mcq_back.mcq.handler:
+        class: %mcq.handler.class%
+        arguments: [@mcq_back.mcq.form, @request, @mcq_back.mcq.manager]
+        scope: request
+
+    mcq_back.mcq.edit.type:
+        class: %mcq.edit.type.class%
+        tags:
+            - {name: form.type, alias: mcq_back_mcq_edit_type}
+
+    mcq_back.mcq.edit.form:
+        factory_service: form.factory
+        factory_method: createNamed
+        class: %form.symfony.class%
+        arguments:
+            - mcq
+            - mcq_back_mcq_edit_type
+
+    mcq_back.mcq.edit.handler:
+        class: %mcq.handler.class%
+        arguments: [@mcq_back.mcq.edit.form, @request, @mcq_back.mcq.manager]
+        scope: request
+
+    mcq_back.topic.manager:
+        class: %topic.manager.class%
+        arguments: [@doctrine.orm.entity_manager]
+
+    mcq_back.topic.type:
+        class: %topic.type.class%
+        tags:
+            - {name: form.type, alias: mcq_back_topic_type}
+
+    mcq_back.topic.form:
+        factory_service: form.factory
+        factory_method: createNamed
+        class: %form.symfony.class%
+        arguments:
+            - topic
+            - mcq_back_topic_type
+
+    mcq_back.topic.handler:
+        class: %topic.handler.class%
+        arguments: [@mcq_back.topic.form, @request, @mcq_back.topic.manager]
+        scope: request
+
+    mcq_back.topic.edit.type:
+        class: %topic.edit.type.class%
+        tags:
+            - {name: form.type, alias: mcq_back_topic_edit_type}
+
+    mcq_back.topic.edit.form:
+        factory_service: form.factory
+        factory_method: createNamed
+        class: %form.symfony.class%
+        arguments:
+            - topic
+            - mcq_back_topic_edit_type
+
+    mcq_back.topic.edit.handler:
+        class: %topic.handler.class%
+        arguments: [@mcq_back.topic.edit.form, @request, @mcq_back.topic.manager]
+        scope: request
+
+    mcq_back.question.manager:
+        class: %question.manager.class%
+        arguments: [@doctrine.orm.entity_manager]
+
+    mcq_back.question.type:
+        class: %question.type.class%
+        tags:
+            - {name: form.type, alias: mcq_back_question_type}
+
+    mcq_back.question.form:
+        factory_service: form.factory
+        factory_method: createNamed
+        class: %form.symfony.class%
+        arguments:
+            - question
+            - mcq_back_question_type
+
+    mcq_back.question.handler:
+        class: %question.handler.class%
+        arguments: [@mcq_back.question.form, @request, @mcq_back.question.manager]
+        scope: request
+
+    mcq_back.question.edit.type:
+        class: %question.edit.type.class%
+        tags:
+            - {name: form.type, alias: mcq_back_question_edit_type}
+
+    mcq_back.question.edit.form:
+        factory_service: form.factory
+        factory_method: createNamed
+        class: %form.symfony.class%
+        arguments:
+            - question
+            - mcq_back_question_edit_type
+
+    mcq_back.question.edit.handler:
+        class: %question.handler.class%
+        arguments: [@mcq_back.question.edit.form, @request, @mcq_back.question.manager]
+        scope: request
+
+    mcq_back.choice.manager:
+        class: %choice.manager.class%
+        arguments: [@doctrine.orm.entity_manager]
+
+    mcq_back.choice.type:
+        class: %choice.type.class%
+        tags:
+            - {name: form.type, alias: mcq_back_choice_type}
+
+    mcq_back.choice.form:
+        factory_service: form.factory
+        factory_method: createNamed
+        class: %form.symfony.class%
+        arguments:
+            - choice
+            - mcq_back_choice_type
+
+    mcq_back.choice.handler:
+        class: %choice.handler.class%
+        arguments: [@mcq_back.choice.form, @request, @mcq_back.choice.manager]
+        scope: request
+
+    mcq_back.choice.edit.type:
+        class: %choice.edit.type.class%
+        tags:
+            - {name: form.type, alias: mcq_back_choice_edit_type}
+
+    mcq_back.choice.edit.form:
+        factory_service: form.factory
+        factory_method: createNamed
+        class: %form.symfony.class%
+        arguments:
+            - choice
+            - mcq_back_choice_edit_type
+
+    mcq_back.choice.edit.handler:
+        class: %choice.handler.class%
+        arguments: [@mcq_back.choice.edit.form, @request, @mcq_back.choice.manager]
+        scope: request
+
+    mcq_back.session.manager:
+        class: %session.manager.class%
+        arguments: [@doctrine.orm.entity_manager]
+
+    mcq_back.session.type:
+        class: %session.type.class%
+        tags:
+            - {name: form.type, alias: mcq_back_session_type}
+
+    mcq_back.session.form:
+        factory_service: form.factory
+        factory_method: createNamed
+        class: %form.symfony.class%
+        arguments:
+            - sessionc
+            - mcq_back_session_type
+
+    mcq_back.session.handler:
+        class: %session.handler.class%
+        arguments: [@mcq_back.session.form, @request, @mcq_back.session.manager]
+        scope: request
+
+    mcq_back.session.edit.type:
+        class: %session.edit.type.class%
+        tags:
+            - {name: form.type, alias: mcq_back_session_edit_type}
+
+    mcq_back.session.edit.form:
+        factory_service: form.factory
+        factory_method: createNamed
+        class: %form.symfony.class%
+        arguments:
+            - session
+            - mcq_back_session_edit_type
+
+    mcq_back.session.edit.handler:
+        class: %session.handler.class%
+        arguments: [@mcq_back.session.edit.form, @request, @mcq_back.session.manager]
+        scope: request
+
+    mcq_back.session.generate.type:
+            class: %session.generate.type.class%
+            tags:
+                - {name: form.type, alias: mcq_back_session_generate_type}
+
+    mcq_back.session.generate.form:
+            factory_service: form.factory
+            factory_method: createNamed
+            class: %form.symfony.class%
+            arguments:
+                - session
+                - mcq_back_session_generate_type
+
+    mcq_back.session.generate.handler:
+        class: %session.handler.class%
+        arguments: [@mcq_back.session.generate.form, @request, @mcq_back.session.manager]
+        scope: request

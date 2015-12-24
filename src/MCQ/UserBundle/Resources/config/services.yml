@@ -1,0 +1,8 @@
+
+services:
+  redirect.after.login:
+    class: MCQ\UserBundle\Redirection\AfterLoginRedirection
+    arguments: [@router]
+  redirect.after.logout:
+    class: MCQ\UserBundle\Redirection\AfterLogoutRedirection
+    arguments: [@router, @security.context]

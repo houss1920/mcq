@@ -1,0 +1,48 @@
+{% extends 'MCQFrontBundle:Default:index.html.twig' %}
+
+{% block body %}
+    <div align="center">
+        {% for session in session %}
+        <table class="table">
+            <tr>
+                <th width="30%"><span class="label label-default">Session :  </span></th>
+            </tr>
+            <tr>
+                <td>Session pour {{ session.user }}</td>
+            </tr>
+            <tr>
+                <th width="30%"><span class="label label-default">Expiration:  </span></th>
+            </tr>
+            <tr>
+                <td>{% if session.expiration == 1%}
+                            Expiré
+                        {% else %}
+                            Valable
+                        {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th width="30%"><span class="label label-default">Resultat:  </span></th>
+            </tr>
+            <tr>
+                <td>{% if session.expiration == 1%}
+                        {{ session.result }}
+                    {% else %}
+                        Tu n'a pas encore passer votre examan !!
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                {% if session.expiration == 0 %}
+                <div align="right"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#session"><span class="glyphicon glyphicon-alert" aria-hidden="true"></span><a href="{{ path('mcq_front_exam', {'id' : session.mcq.id }) }}"> Passer l'examan !</a></button></div>
+                {% endif %}
+                </td>
+            </tr>
+
+        </table>
+            {% endfor %}
+    </div>
+
+
+{% endblock %}

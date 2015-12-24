@@ -1,0 +1,38 @@
+body {
+    margin: 0;
+    background-attachment:fixed;         /*Permet de "fixer" le fond, pour ne pas qu'il bouge en même temps que le texte (fixed, scroll)  scroll : l'image de fond défile avec le texte (par défaut).*/
+    background-repeat:    no-repeat;     /* Gère la répétition du fond :      no-repeat : le fond ne sera pas répété. L'image sera donc unique sur la page.        repeat-x : le fond sera répété uniquement sur la première ligne, horizontalement.   repeat-y : le fond sera répété uniquement sur la première colonne, verticalement.   repeat : le fond sera répété (par défaut) */
+    background-position: inherit;
+    background-size: cover;
+}
+.auth{
+    width: 250px;
+    height: 250px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+.bd {
+    background-color: transparent;
+    box-shadow: #080808;
+    height: 80%;
+    align-content: center;
+    margin-bottom: 5%;
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.dec{
+    color: #999999;
+    margin-top: 1.2%;
+}
+.qcm{
+    border: solid;
+}
+.question{
+    border: solid;
+}
+.choice{
+    border: solid;
+}

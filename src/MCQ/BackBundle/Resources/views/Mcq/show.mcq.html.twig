@@ -1,0 +1,19 @@
+{% extends 'MCQBackBundle:Default:index.html.twig' %}
+{% block body %}
+        <div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <tr>
+                    <h4 class="panel-title">Titre : {{ mcq.mcqname }} Niveau : {{ mcq.level }}</h4>
+                        <div align="right">
+                            <a href="{{ path('mcq_back_update_mcq', {'id' : mcq.id }) }}"><button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Modifier"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button></a>
+                            <a href="{{ path('mcq_back_delete_mcq', {'id' : mcq.id }) }}"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-remove" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Supprimer"></span></button></a>
+                        </div>
+                </tr>
+            </div>
+            <div align="left" class="panel-body">
+            {% render(controller('MCQBackBundle:Topic:list',{'id':mcq.id})) %}
+            </div>
+        </div>
+        </div>
+{% endblock %}

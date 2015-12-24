@@ -1,0 +1,33 @@
+{% block body %}
+    <div align="right"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal2"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter Reponse</button></div>
+    <br>
+    <div align="center">
+        <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div align="center">
+                            {% render(controller("MCQBackBundle:Choice:add")) %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div align="center">
+    <table class="table">
+        <tr>
+            <th width="30%"><span class="label label-default">Reponse  </span></th>
+            <th width="30%"><span class="label label-default">Note  </span></th>
+
+        </tr>
+        {% for choice in choice %}
+            <tr>
+                <td>{{ choice.value }}</td>
+                <td>{{ choice.score }}</td>
+                <td align="right"><a href="{{ path('mcq_back_update_choice', {'id' : choice.id }) }}"><button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Modifier"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button></a></td>
+                <td><a href="{{ path('mcq_back_delete_choice', {'id' : choice.id }) }}"><button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Supprimer"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></a></td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

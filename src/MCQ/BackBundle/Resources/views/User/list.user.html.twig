@@ -1,0 +1,43 @@
+{% extends 'MCQBackBundle:Default:index.html.twig' %}
+{% block body %}
+    <div align="right"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#user"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Ajouter Utilisateur</button></div>
+    <div align="center">
+        <div class="modal fade" id="user" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div align="center">
+                            {% render(controller("MCQBackBundle:User:add")) %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div align="center">
+        <table class="table">
+            <tr>
+                <th width="30%"><span class="label label-default">Nom d'utilisateur  </span></th>
+                <th width="30%"><span class="label label-default">C.I.N  </span></th>
+                <th width="30%"><span class="label label-default">Email  </span></th>
+            </tr>
+
+            {% for user in user if not user.roles == is_granted('ROLE_ADMIN') %}
+                <tr>
+                    <td width="10%">{{ user.username}}</td>
+                    <td width="10%">{{ user.cin }}</td>
+                    <td width="10%">{{ user.email }}</td>
+                    <td ><a href="{{ path('mcq_back_delete_user', {'id' : user.id }) }}"><button type="button" class="btn btn-default" data-placement="top" title="Supprimer"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></a></td>
+                    <td >
+
+                        <a href="{{ path('mcq_back_session', {'id' : user.id }) }}"><button type="button" class="btn btn-default">Accéder session</button></a>
+
+                    </td>
+                </tr>
+
+            {% endfor %}
+
+        </table>
+    </div>
+{% endblock %}

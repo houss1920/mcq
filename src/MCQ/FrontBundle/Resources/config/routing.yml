@@ -1,0 +1,11 @@
+mcq_front_homepage:
+    path:     /front
+    defaults: { _controller: MCQFrontBundle:Default:front }
+
+mcq_front_session:
+    path:   /front/session
+    defaults: {_controller: MCQFrontBundle:Session:show}
+
+mcq_front_exam:
+    path:   /front/{id}/exam
+    defaults: {_controller: MCQFrontBundle:Exam:exam}

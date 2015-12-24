@@ -1,0 +1,160 @@
+mcq_back_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: MCQBackBundle:Default:index }
+
+mcq_back_menu1:
+    path:     /admin
+    defaults: { _controller: MCQBackBundle:Default:admin }
+
+mcq_back_users:
+    path:     /admin/users
+    defaults: { _controller: MCQBackBundle:User:list }
+
+mcq_back_delete_user:
+    path:     /users/delete/{id}
+    defaults: { _controller: MCQBackBundle:User:delete }
+    requirements:
+        id: \d+
+
+mcq_back_add_user:
+    path:     /users/add
+    defaults: { _controller: MCQBackBundle:User:add }
+
+mcq_back_mcqs:
+    path:     /admin/mcqs
+    defaults: { _controller: MCQBackBundle:Mcq:list }
+
+mcq_back_mcq:
+    path:     /admin/mcq/{id}
+    defaults: { _controller: MCQBackBundle:Mcq:show }
+    requirements:
+        id: \d+
+
+mcq_back_add_mcq:
+    path:     /mcqs/add
+    defaults: { _controller: MCQBackBundle:Mcq:add }
+
+mcq_back_update_mcq:
+    path:     /mcqs/update/{id}
+    defaults: { _controller: MCQBackBundle:Mcq:update }
+    requirements:
+        id: \d+
+
+mcq_back_edit_mcq:
+    path:     /mcqs/edit/{id}
+    defaults: { _controller: MCQBackBundle:Mcq:edit }
+    requirements:
+        id: \d+
+
+mcq_back_delete_mcq:
+    path:     /mcqs/delete/{id}
+    defaults: { _controller: MCQBackBundle:Mcq:delete }
+    requirements:
+        id: \d+
+
+mcq_back_topic:
+    path:     /admin/theme
+    defaults: { _controller: MCQBackBundle:Topic:lister}
+
+mcq_back_add_topic:
+    path:     /qcm/{id}/add-theme
+    defaults: { _controller: MCQBackBundle:Topic:add }
+
+mcq_back_update_topic:
+    path:     /themes/update/{id}
+    defaults: { _controller: MCQBackBundle:Topic:update }
+    requirements:
+        id: \d+
+
+mcq_back_delete_topic:
+    path:     /themes/delete/{id}
+    defaults: { _controller: MCQBackBundle:Topic:delete }
+    requirements:
+        id: \d+
+
+mcq_back_question:
+    path:     /questions
+    defaults: { _controller: MCQBackBundle:Question:lister}
+
+mcq_back_questions:
+    path:     /questions/{id}
+    defaults: { _controller: MCQBackBundle:Question:list}
+    requirements :
+        id: /d+
+mcq_back_add_question:
+    path:     /questions/add
+    defaults: { _controller: MCQBackBundle:Question:add }
+
+mcq_back_update_question:
+    path:     /questions/update/{id}
+    defaults: { _controller: MCQBackBundle:Question:update }
+    requirements:
+        id: \d+
+
+mcq_back_delete_question:
+    path:     /questions/delete/{id}
+    defaults: { _controller: MCQBackBundle:Question:delete }
+    requirements:
+        id: \d+
+
+mcq_back_sessions:
+    path:     /admin/sessions
+    defaults: { _controller: MCQBackBundle:Session:list}
+
+mcq_back_session:
+    path:     /admin/session/{id}
+    defaults: { _controller: MCQBackBundle:Session:show}
+    requirements:
+        id: \d+
+
+mcq_back_add_session:
+    path:     /admin/sessions/add/
+    defaults: { _controller: MCQBackBundle:Session:add }
+
+mcq_back_generate_session:
+    path:     /admin/sessions/{id}/generate/
+    defaults: { _controller: MCQBackBundle:Session:generate }
+
+mcq_back_update_session:
+    path:     /sessions/update/{id}
+    defaults: { _controller: MCQBackBundle:Session:update }
+    requirements:
+        id: \d+
+
+mcq_back_delete_session:
+    path:     /sessions/delete/{id}
+    defaults: { _controller: MCQBackBundle:Session:delete }
+    requirements:
+        id: \d+
+
+mcq_back_mcq_session:
+    path:     /mcq/{id}
+    defaults: { _controller: MCQBackBundle:Mcq:show }
+    requirements:
+        id: \d+
+
+mcq_back_choice:
+    path:     /admin/reponses
+    defaults: { _controller: MCQBackBundle:Choice:lister }
+
+mcq_back_choices:
+    path:     /reponses/{id}
+    defaults: { _controller: MCQBackBundle:Choice:list }
+    requirements:
+        id: \d+
+mcq_back_add_choice:
+    path:     /reponses/add
+    defaults: { _controller: MCQBackBundle:Choice:add }
+
+mcq_back_update_choice:
+    path:     /reponses/update/{id}
+    defaults: { _controller: MCQBackBundle:Choice:update }
+    requirements:
+        id: \d+
+
+mcq_back_delete_choice:
+    path:     /reponses/delete/{id}
+    defaults: { _controller: MCQBackBundle:Choice:delete }
+    requirements:
+        id: \d+
+

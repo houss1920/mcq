@@ -1,0 +1,4 @@
+mcq_general_homepage:
+    path:     /
+    defaults: { _controller: MCQGeneralBundle:Default:index }
+

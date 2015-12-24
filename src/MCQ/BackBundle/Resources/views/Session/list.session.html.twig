@@ -1,0 +1,55 @@
+{% extends 'MCQBackBundle:Default:index.html.twig' %}
+{% block body %}
+    <div align="right"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#session"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter session</button></div>
+    <div align="center">
+        <div class="modal fade" id="session" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div align="center">
+                            {% render(controller("MCQBackBundle:Session:add")) %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div align="center">
+        <table class="table">
+            <tr>
+                <th width="30%"><span class="label label-default">Session :  </span></th>
+                <th width="30%"><span class="label label-default">Expiration:  </span></th>
+                <th width="30%"><span class="label label-default">Resultat:  </span></th>
+            </tr>
+            {% for session in session %}
+                <tr>
+                    <td><a href="{{ path('mcq_back_mcq_session', {'id' : session.mcq.id }) }}" >Session pour {{ session.user }}</a></td>
+                    <td>{% if session.expiration == 1%}
+                    Expiré
+                {% else %}
+                    Valable
+                {% endif %}
+                </td>
+                    <td>{{ session.result }}</td>
+                    <td align="right"><button type="button" class="btn btn-default" data-toggle="modal" data-placement="top" title="Modifier" data-target="#session{{ session.id }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button></td>
+                    <td><a href="{{ path('mcq_back_delete_session', {'id' : session.id }) }}"><button type="button" class="btn btn-default" data-placement="top" title="Supprimer"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></a></td>
+                </tr>
+                <div align="center">
+                    <div class="modal fade" id="session{{ session.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <div align="center">
+                                        {% render(controller("MCQBackBundle:Session:update",{'id' : session.id})) %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </table>
+    </div>
+
+{% endblock %}
